@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cyber-bg: #0f172a;
+  --color-cyber-cyan: #06b6d4;
+  --color-cyber-red: #f43f5e;
+  --color-cyber-amber: #f59e0b;
+  --font-cyber: "Inter", sans-serif;
+  
+  --animate-spin-slow: spin 3s linear infinite;
+  --animate-pulse-fast: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--color-cyber-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+}
