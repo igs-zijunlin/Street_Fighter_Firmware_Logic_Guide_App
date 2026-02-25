@@ -2,7 +2,7 @@ name: Deploy static content to Pages
 
 on:
   push:
-    branches: ["main"] # 如果您的預設分支叫 master 就改為 master
+    branches: ["master"] # 如果您的預設分支叫 master 就改為 master
   workflow_dispatch:
 
 permissions:
