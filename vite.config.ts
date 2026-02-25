@@ -8,4 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  base: process.env.NODE_ENV === 'production' ? '/Street_Fighter_Firmware_Logic_Guide_App/' : '/',
 })
