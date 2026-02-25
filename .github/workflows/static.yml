@@ -29,7 +29,6 @@ jobs:
           node-version: 20
       - name: Build Web App
         run: |
-          cd web_app
           npm install
           npm run build
       - name: Setup Pages
@@ -37,7 +36,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './web_app/dist'
+          path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
