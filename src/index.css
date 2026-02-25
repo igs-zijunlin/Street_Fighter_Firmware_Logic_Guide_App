@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cyber-bg: #0f172a;
-  --color-cyber-cyan: #06b6d4;
-  --color-cyber-red: #f43f5e;
+  --color-cyber-bg: #f8fafc;
+  --color-cyber-cyan: #0284c7;
+  --color-cyber-red: #e11d48;
   --color-cyber-amber: #f59e0b;
   --font-cyber: "Inter", sans-serif;
-  
+
   --animate-spin-slow: spin 3s linear infinite;
   --animate-pulse-fast: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
@@ -16,8 +16,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
+  color-scheme: light;
+  color: rgba(15, 23, 42, 0.87);
   background-color: var(--color-cyber-bg);
 
   font-synthesis: none;

@@ -22,19 +22,19 @@ export const MermaidFlowchart: React.FC<MermaidFlowchartProps> = ({ chart, class
             logLevel: 5, // 避免太多 log 噴錯
             securityLevel: 'loose', // 允許點擊事件等
             themeVariables: {
-                // 深色背景下清晰可見的高科技配色 (Cyberpunk style)
-                primaryColor: '#0f172a', // slate-900 (背景色)
-                primaryTextColor: '#cbd5e1', // slate-300 (主文字)
-                primaryBorderColor: '#38bdf8', // sky-400 (邊框/線條)
-                lineColor: '#0ea5e9', // sky-500 (連接線)
-                secondaryColor: '#1e293b', // slate-800
-                tertiaryColor: '#334155', // slate-700
+                // 明亮背景下的乾淨配色 (Light Theme style)
+                primaryColor: '#ffffff', // white (背景色)
+                primaryTextColor: '#334155', // slate-700 (主文字)
+                primaryBorderColor: '#94a3b8', // slate-400 (邊框/線條)
+                lineColor: '#64748b', // slate-500 (連接線)
+                secondaryColor: '#f1f5f9', // slate-100
+                tertiaryColor: '#e2e8f0', // slate-200
                 // 判斷菱形 (Decision) 的顏色
-                nodeBorder: '#38bdf8',
-                clusterBkg: 'rgba(15, 23, 42, 0.5)', // Group 背景
-                clusterBorder: '#334155',
+                nodeBorder: '#94a3b8',
+                clusterBkg: 'rgba(241, 245, 249, 0.5)', // Group 背景 (slate-100)
+                clusterBorder: '#cbd5e1',
                 // 邊緣高亮
-                edgeLabelBackground: '#020617', // slate-950 (Label 底色)
+                edgeLabelBackground: '#ffffff', // white (Label 底色)
                 fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif, var(--font-cyber)',
                 fontSize: '14px',
             }
@@ -78,16 +78,16 @@ export const MermaidFlowchart: React.FC<MermaidFlowchartProps> = ({ chart, class
     }, [chart]);
 
     return (
-        <div className={cn("relative w-full overflow-x-auto overflow-y-hidden rounded-xl bg-slate-950/50 border border-slate-800/80 p-6 flex flex-col items-center justify-center min-h-[300px]", className)}>
+        <div className={cn("relative w-full overflow-x-auto overflow-y-hidden rounded-xl bg-white border border-slate-200 shadow-sm p-6 flex flex-col items-center justify-center min-h-[300px]", className)}>
             {isLoading && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/80 z-10 backdrop-blur-sm">
-                    <Loader2 className="w-8 h-8 text-cyan-500 animate-spin mb-4" />
-                    <span className="text-cyan-400 font-mono text-sm tracking-widest animate-pulse">RENDERING FLOWCHART...</span>
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/80 z-10 backdrop-blur-sm">
+                    <Loader2 className="w-8 h-8 text-cyan-600 animate-spin mb-4" />
+                    <span className="text-cyan-700 font-mono text-sm tracking-widest animate-pulse">RENDERING FLOWCHART...</span>
                 </div>
             )}
 
             {error ? (
-                <div className="text-rose-500 font-mono text-sm text-center bg-rose-500/10 p-4 rounded-lg border border-rose-500/20 max-w-2xl">
+                <div className="text-rose-600 font-mono text-sm text-center bg-rose-50 p-4 rounded-lg border border-rose-200 max-w-2xl">
                     <p className="font-bold mb-2">Syntax Error in Mermaid Graph:</p>
                     <pre className="text-left whitespace-pre-wrap text-xs">{error}</pre>
                 </div>
