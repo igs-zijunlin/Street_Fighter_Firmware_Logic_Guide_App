@@ -24,7 +24,7 @@ const TurntableVisualizer: React.FC<TurntableProps> = ({ qei, inventory }) => {
             >
                 {/* Slots */}
                 {inventory.map((slot, i) => {
-                    const angle = (i * 36) * (Math.PI / 180);
+                    const angle = (-i * 36) * (Math.PI / 180);
                     const radius = 120; // px
                     const x = Math.cos(angle) * radius;
                     const y = Math.sin(angle) * radius;
@@ -40,7 +40,7 @@ const TurntableVisualizer: React.FC<TurntableProps> = ({ qei, inventory }) => {
                             style={{
                                 left: `calc(50% + ${x}px - 24px)`,
                                 top: `calc(50% + ${y}px - 32px)`,
-                                transform: `rotate(${i * 36 + 90}deg)`
+                                transform: `rotate(${-i * 36 + 270}deg)`
                             }}
                         >
                             <span className="text-xs font-mono text-slate-700 font-medium">{i + 1}</span>
@@ -49,8 +49,9 @@ const TurntableVisualizer: React.FC<TurntableProps> = ({ qei, inventory }) => {
                 })}
 
                 {/* Center Hub */}
-                <div className="absolute top-1/2 left-1/2 w-16 h-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-slate-100 border-4 border-slate-200 flex items-center justify-center z-10 shadow-sm">
-                    <div className="w-8 h-8 rounded-full bg-cyan-400 animate-pulse opacity-50"></div>
+                <div className="absolute top-1/2 left-1/2 w-16 h-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-slate-100 border-4 border-slate-200 flex items-center justify-center z-10 shadow-sm text-[10px] font-bold text-slate-400">
+                    <div className="absolute inset-0 m-auto w-8 h-8 rounded-full bg-cyan-400 animate-pulse opacity-50"></div>
+                    v3
                 </div>
             </motion.div>
 

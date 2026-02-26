@@ -182,7 +182,7 @@ export const useHadoukenLogic = () => {
                 break;
         }
 
-        const targetAngle = (desiredAbsoluteAngle - slotIndex * 36 + 360 * 10) % 360;
+        const targetAngle = (desiredAbsoluteAngle + slotIndex * 36) % 360;
         const calcQei = Math.round((targetAngle / 360) * QEI_ONE_ROUND);
 
         setTargetQei(calcQei);
