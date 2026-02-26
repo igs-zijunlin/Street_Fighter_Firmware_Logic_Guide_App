@@ -195,7 +195,16 @@ export const useHadoukenLogic = () => {
         addLog(`定位指令: 移動 Slot ${slotIndex + 1} 至 ${posLabel} (目標 QEI: ${calcQei}) ...`);
     };
 
-    const performDispense = (slotIndex: number) => {
+    const performDispense = (slotIndex: number, player: '1P' | '2P' = '1P') => {
+        const expectedAngle = player === '1P' ? 90 : 270;
+        const currentAngle = ((qei / QEI_ONE_ROUND) * 360) % 360;
+        const slotAngle = (expectedAngle + slotIndex * 36) % 360;
+
+        if (Math.abs(currentAngle - slotAngle) > 5 && Math.abs(currentAngle - slotAngle) < 355) {
+            addLog(`[錯誤] Slot ${slotIndex + 1} 不在出卡口位置，無法執行出卡！`);
+            return;
+        }
+
         setInventory(prev => {
             const slot = prev.find(s => s.index === slotIndex);
             if (slot && !slot.hasCard) {
@@ -208,6 +217,15 @@ export const useHadoukenLogic = () => {
     };
 
     const performRefill = (slotIndex: number) => {
+        const expectedAngle = 0;
+        const currentAngle = ((qei / QEI_ONE_ROUND) * 360) % 360;
+        const slotAngle = (expectedAngle + slotIndex * 36) % 360;
+
+        if (Math.abs(currentAngle - slotAngle) > 5 && Math.abs(currentAngle - slotAngle) < 355) {
+            addLog(`[錯誤] Slot ${slotIndex + 1} 不在補卡口位置，無法執行補卡！`);
+            return;
+        }
+
         setInventory(prev => {
             const slot = prev.find(s => s.index === slotIndex);
             if (slot && slot.hasCard) {
@@ -220,6 +238,15 @@ export const useHadoukenLogic = () => {
     };
 
     const performReject = (slotIndex: number) => {
+        const expectedAngle = 180;
+        const currentAngle = ((qei / QEI_ONE_ROUND) * 360) % 360;
+        const slotAngle = (expectedAngle + slotIndex * 36) % 360;
+
+        if (Math.abs(currentAngle - slotAngle) > 5 && Math.abs(currentAngle - slotAngle) < 355) {
+            addLog(`[錯誤] Slot ${slotIndex + 1} 不在排廢區位置，無法排廢！`);
+            return;
+        }
+
         setInventory(prev => {
             const slot = prev.find(s => s.index === slotIndex);
             if (slot && !slot.hasCard) {
