@@ -64,11 +64,11 @@ const GateControl = () => {
             </div>
 
             {/* Tabs */}
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
                 <button
                     onClick={() => setActiveTab('open')}
                     className={cn(
-                        "relative px-8 py-4 rounded-xl font-bold tracking-widest transition-all duration-300 border overflow-hidden group shadow-sm",
+                        "relative px-4 md:px-8 py-3 md:py-4 rounded-xl font-bold tracking-widest transition-all duration-300 border overflow-hidden group shadow-sm text-sm sm:text-base",
                         activeTab === 'open'
                             ? "bg-cyan-50 border-cyan-500 text-cyan-700"
                             : "bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:text-slate-700"
@@ -82,7 +82,7 @@ const GateControl = () => {
                 <button
                     onClick={() => setActiveTab('close')}
                     className={cn(
-                        "relative px-8 py-4 rounded-xl font-bold tracking-widest transition-all duration-300 border overflow-hidden group shadow-sm",
+                        "relative px-4 md:px-8 py-3 md:py-4 rounded-xl font-bold tracking-widest transition-all duration-300 border overflow-hidden group shadow-sm text-sm sm:text-base",
                         activeTab === 'close'
                             ? "bg-emerald-50 border-emerald-500 text-emerald-700"
                             : "bg-white border-slate-200 text-slate-500 hover:border-slate-300 hover:text-slate-700"

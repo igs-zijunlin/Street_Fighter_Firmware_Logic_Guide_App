@@ -27,8 +27,8 @@ const Simulation = () => {
 
     return (
         <div className="flex flex-col gap-6">
-            <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700 font-cyber">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-0">
+                <h2 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700 font-cyber">
                     出卡模組動作模擬
                 </h2>
                 <div className="flex gap-4">
