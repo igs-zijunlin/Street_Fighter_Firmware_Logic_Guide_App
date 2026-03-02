@@ -195,23 +195,28 @@ export const useHadoukenLogic = () => {
         addLog(`定位指令: 移動 Slot ${slotIndex + 1} 至 ${posLabel} (目標 QEI: ${calcQei}) ...`);
     };
 
-    const performDispense = (slotIndex: number, player: '1P' | '2P' = '1P') => {
-        const expectedAngle = player === '1P' ? 90 : 270;
+    const performDispense = (slotIndex: number) => {
         const currentAngle = ((qei / QEI_ONE_ROUND) * 360) % 360;
-        const slotAngle = (expectedAngle + slotIndex * 36) % 360;
+        const slotAngle1P = (90 + slotIndex * 36) % 360;
+        const slotAngle2P = (270 + slotIndex * 36) % 360;
 
-        if (Math.abs(currentAngle - slotAngle) > 5 && Math.abs(currentAngle - slotAngle) < 355) {
-            addLog(`[錯誤] Slot ${slotIndex + 1} 不在出卡口位置，無法執行出卡！`);
+        const isAt1P = Math.abs(currentAngle - slotAngle1P) <= 5 || Math.abs(currentAngle - slotAngle1P) >= 355;
+        const isAt2P = Math.abs(currentAngle - slotAngle2P) <= 5 || Math.abs(currentAngle - slotAngle2P) >= 355;
+
+        if (!isAt1P && !isAt2P) {
+            addLog(`[錯誤] Slot ${slotIndex + 1} 不在出卡口位置 (1P 或 2P)，無法執行出卡！`);
             return;
         }
+
+        const outPort = isAt1P ? '1P' : '2P';
 
         setInventory(prev => {
             const slot = prev.find(s => s.index === slotIndex);
             if (slot && !slot.hasCard) {
-                addLog(`[錯誤] Slot ${slotIndex + 1} 為空盒，無法執行出卡！`);
+                addLog(`[錯誤] Slot ${slotIndex + 1} 為空盒，無法由 ${outPort} 出卡口執行出卡！`);
                 return prev;
             }
-            addLog(`[成功] Slot ${slotIndex + 1} 出卡動作完成，卡盒已清空！`);
+            addLog(`[成功] Slot ${slotIndex + 1} 由 ${outPort} 出卡動作完成，卡盒已清空！`);
             return prev.map(s => s.index === slotIndex ? { ...s, hasCard: false } : s);
         });
     };
