@@ -1,8 +1,8 @@
-import { ShieldAlert, AlertTriangle, Disc, Scan, Search } from 'lucide-react';
+import { ShieldAlert, AlertTriangle, Disc, Scan, Search, Hash } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 const ErrorCodes = () => {
-    // 錯誤分類資料 (精簡版 + 感測器檢查點)
+    // 錯誤分類資料 (精簡版 + 感測器檢查點 + Enum Value)
     const errorCategories = [
         {
             title: '閘門相關 (Solenoid & Gate)',
@@ -12,24 +12,28 @@ const ErrorCodes = () => {
             border: 'border-amber-200',
             items: [
                 {
+                    value: 5,
                     code: 'HADOUKEN_ERR_GATE_NOT_CLOSED',
                     name: '閘門未關閉 / 安全互鎖',
                     description: '轉盤啟動前檢查到閘門未關。嘗試強制關門 600ms 後仍未到位，觸發異常並鎖死轉盤以防撞擊。',
                     sensors: ['1P 關門極限開關 (微動)', '2P 關門極限開關 (微動)', '排廢口關門極限開關 (微動)']
                 },
                 {
+                    value: 8,
                     code: 'HADOUKEN_ERR_SOLENOID_1P',
                     name: '1P 閘門異常',
                     description: '1P 閘門執行開關動作時，逾時未抵達極限微動開關 (機構卡住或訊號異常)。',
                     sensors: ['1P 開門與關門極限開關 (微動)', '1P 閘門推桿馬達/電磁閥']
                 },
                 {
+                    value: 9,
                     code: 'HADOUKEN_ERR_SOLENOID_2P',
                     name: '2P 閘門異常',
                     description: '2P 閘門執行開關動作時，逾時未抵達極限微動開關。',
                     sensors: ['2P 開門與關門極限開關 (微動)', '2P 閘門推桿馬達/電磁閥']
                 },
                 {
+                    value: 10,
                     code: 'HADOUKEN_ERR_SOLENOID_RECTCLE',
                     name: '排廢閘門異常',
                     description: '廢卡排除流程中，排廢閘門執行開關動作時，逾時未到位。',
@@ -45,24 +49,28 @@ const ErrorCodes = () => {
             border: 'border-red-200',
             items: [
                 {
+                    value: 6,
                     code: 'HADOUKEN_ERR_NO_CARD_1P',
                     name: '1P 未掉卡',
                     description: '1P 開門出卡後，超過 2 秒光眼仍未偵測到卡片掉落 (可能為空盒或卡彈)。',
                     sensors: ['1P 出卡通道掉落檢測光眼 (對射/反射式)']
                 },
                 {
+                    value: 7,
                     code: 'HADOUKEN_ERR_NO_CARD_2P',
                     name: '2P 未掉卡',
                     description: '2P 開門出卡後，超過 2 秒光眼仍未偵測到卡片掉落。',
                     sensors: ['2P 出卡通道掉落檢測光眼 (對射/反射式)']
                 },
                 {
+                    value: 3,
                     code: 'HADOUKEN_ERR_NO_CARD_RECTCLE',
                     name: '排廢口未掉卡',
                     description: '排廢閘門開啟後，超過 2 秒排廢口光眼仍未偵測到廢卡掉出。',
                     sensors: ['排廢通道掉落檢測光眼 (對射/反射式)']
                 },
                 {
+                    value: 4,
                     code: 'HADOUKEN_ERR_CARD_EXIST',
                     name: '出卡機口異物/殘卡',
                     description: '外部出卡機準備作動時，偵測到通道內已有異物或殘留前一張卡片。',
@@ -78,12 +86,14 @@ const ErrorCodes = () => {
             border: 'border-purple-200',
             items: [
                 {
+                    value: 2,
                     code: 'HADOUKEN_ERR_TIMEOUT_MOTOR',
                     name: '轉盤馬達超時',
                     description: '主轉盤馬達啟動後，超過規定時間仍未抵達目標編碼器位置 (轉速過慢或阻力過大)。',
                     sensors: ['伺服/步進轉盤主馬達', '原點/補卡點定位光眼 (若找不到基準點)']
                 },
                 {
+                    value: 11,
                     code: 'HADOUKEN_ERR_ENCODER_FAULT',
                     name: '編碼器故障',
                     description: '已送出馬達驅動訊號，但 QEI 編碼器數值無變化。可能為線路脫落、馬達卡死或皮帶斷裂。',
@@ -99,12 +109,14 @@ const ErrorCodes = () => {
             border: 'border-blue-200',
             items: [
                 {
+                    value: 12,
                     code: 'HADOUKEN_ERR_QR_CONFIG_FAIL',
                     name: 'QR 配置失敗',
                     description: '開機對 QR 掃描器進行參數設定時，等待回應逾時 (掃描器未通電或斷線)。',
                     sensors: ['QR Code 掃描器 (串列通訊檢查)']
                 },
                 {
+                    value: 1,
                     code: 'HADOUKEN_ERR_QR_FAIL',
                     name: 'QR 掃描失敗',
                     description: '轉盤帶動卡盒至掃描位置後，讀取逾時或未收到有效 QR 資料 (標籤髒污/移失)。',
@@ -155,12 +167,18 @@ const ErrorCodes = () => {
                                             </h4>
                                         </div>
                                         <p className="text-sm font-semibold text-slate-600 ml-3.5 mt-0.5">{err.name}</p>
+                                        <div className="flex items-center gap-1.5 ml-3.5 mt-1">
+                                            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-200 text-slate-600 border border-slate-300">
+                                                <Hash className="w-3 h-3" />
+                                                Value: {err.value}
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className="flex-1 mt-2 md:mt-0 lg:mt-1 space-y-3">
                                         <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-line ml-3.5 md:ml-0">
                                             {err.description}
                                         </p>
-
+                                        
                                         {/* Sensor Information Block */}
                                         {err.sensors && err.sensors.length > 0 && (
                                             <div className="ml-3.5 md:ml-0 flex flex-col sm:flex-row sm:items-start gap-2 pt-2 border-t border-slate-100 border-dashed">
