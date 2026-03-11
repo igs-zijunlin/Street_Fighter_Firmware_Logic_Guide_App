@@ -12,6 +12,7 @@
 *   **樣式引擎**: Tailwind CSS v4 (透過 `@tailwindcss/vite` 整合)
 *   **圖示庫**: `lucide-react`
 *   **圖表套件**: `mermaid` (用於繪製系統狀態機、流程圖)
+*   **部署託管**: GitHub Pages 搭配 GitHub Actions 自動建置
 
 ---
 
@@ -81,7 +82,21 @@
 
 ---
 
-## 5. 給 AI 的 Prompt 建議 (How to instruct AI using this file)
+## 5. 部署與自動化建置 (Deployment & CI/CD)
+
+本專案採用前端純靜態網頁架構，並完全整合至 GitHub 的生態系中進行託管與發布：
+
+*   **網頁託管 (Hosting)**: **GitHub Pages**
+    *   由於不依賴任何後端伺服器 (Serverless)，所有功能（包含韌體邏輯視覺化與狀態機模擬）皆在客戶端瀏覽器執行。
+    *   為相容 GitHub Pages 的靜態路由限制，專案強制使用 `<HashRouter>`，確保使用者重新整理頁面時不會出現 404 Not Found 錯誤。
+*   **持續整合與部署 (CI/CD)**: **GitHub Actions**
+    *   已經配置了自動化發布工作流程，開發者不需手動上傳打包檔案。
+    *   **觸發條件**: 當更新推送 (Push) 至主分支時。
+    *   **運作流程**: GitHub Actions 自動安裝依賴套件 ➡️ 透過 Vite 執行 `npm run build` 打包專案 ➡️ 將產生的 `dist` 目錄內容部屬至 `gh-pages` 分支 ➡️ GitHub Pages 即時更新上線。
+
+---
+
+## 6. 給 AI 的 Prompt 建議 (How to instruct AI using this file)
 
 當你需要 AI 幫你建立新的頁面時，可以在開頭加上這段提示：
 

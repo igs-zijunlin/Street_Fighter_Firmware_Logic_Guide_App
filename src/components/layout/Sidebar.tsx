@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Cpu, Activity, Power, DoorOpen, MapPin, CreditCard, X } from 'lucide-react';
+import { LayoutDashboard, Cpu, Activity, Power, DoorOpen, MapPin, CreditCard, X, AlertTriangle } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 interface SidebarProps {
@@ -15,6 +15,7 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
         { to: '/gate-control', icon: DoorOpen, label: '開關門流程 (Gate Control)' },
         { to: '/positioning', icon: MapPin, label: '定位模組 (Positioning)' },
         { to: '/card-dispenser', icon: CreditCard, label: '讀卡/備卡機 (Card Reader)' },
+        { to: '/error-codes', icon: AlertTriangle, label: '錯誤碼對照 (Error Codes)' },
     ];
 
     return (

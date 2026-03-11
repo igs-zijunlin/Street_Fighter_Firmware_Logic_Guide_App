@@ -7,7 +7,7 @@ import Initialization from './pages/Initialization';
 import GateControl from './pages/GateControl';
 import PositioningFlow from './pages/PositioningFlow';
 import CardDispenserFlow from './pages/CardDispenserFlow';
-
+import ErrorCodes from './pages/ErrorCodes';
 
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
           <Route path="gate-control" element={<GateControl />} />
           <Route path="positioning" element={<PositioningFlow />} />
           <Route path="card-dispenser" element={<CardDispenserFlow />} />
+          <Route path="error-codes" element={<ErrorCodes />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
